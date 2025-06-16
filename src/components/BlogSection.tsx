@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import axios from 'axios';
+import { XMLParser } from 'fast-xml-parser';
 
 type BlogPostProps = {
   title: string;
   excerpt: string;
   date: string;
   url: string;
+};
+
+type RSSItem = {
+  title: string;
+  description: string;
+  link: string;
+  pubDate: string;
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ title, excerpt, date, url }) => {
@@ -29,26 +38,46 @@ const BlogPost: React.FC<BlogPostProps> = ({ title, excerpt, date, url }) => {
 };
 
 const BlogSection: React.FC = () => {
-  const blogPosts = [
-    {
-      title: "Building Self-Healing Test Automation Frameworks",
-      excerpt: "Learn how to create robust test automation frameworks that can adapt to UI changes and reduce maintenance overhead.",
-      date: "May 15, 2025",
-      url: "https://blog.rakeshvardan.com/self-healing-frameworks"
-    },
-    {
-      title: "Implementing Shift-Left Testing in Agile Teams",
-      excerpt: "Strategies for integrating testing earlier in the development lifecycle to catch issues sooner and improve quality.",
-      date: "April 3, 2025",
-      url: "https://blog.rakeshvardan.com/shift-left-testing"
-    },
-    {
-      title: "Modern CI/CD Pipelines for Test Automation",
-      excerpt: "A deep dive into designing efficient CI/CD pipelines specifically optimized for test automation workflows.",
-      date: "March 18, 2025",
-      url: "https://blog.rakeshvardan.com/cicd-for-testing"
-    }
-  ];
+  const [blogPosts, setBlogPosts] = useState<BlogPostProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        // Using a CORS proxy to fetch the RSS feed
+        const corsProxy = 'https://api.allorigins.win/raw?url=';
+        const response = await axios.get(`${corsProxy}${encodeURIComponent('https://blog.rakeshvardan.com/rss.xml')}`);
+        
+        const parser = new XMLParser();
+        const result = parser.parse(response.data);
+        
+        const items: RSSItem[] = result.rss.channel.item;
+        const latestPosts = items.slice(0, 3).map(item => ({
+          title: item.title,
+          excerpt: item.description.replace(/<[^>]+>/g, '').substring(0, 150) + '...',
+          date: new Date(item.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }),
+          url: item.link
+        }));
+
+        setBlogPosts(latestPosts);
+      } catch (err) {
+        console.error('Error fetching blog posts:', err);
+        setError('Failed to load blog posts. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBlogPosts();
+  }, []);
 
   return (
     <section id="blog" className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -62,15 +91,31 @@ const BlogSection: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {blogPosts.map((post, index) => (
-            <BlogPost
-              key={index}
-              title={post.title}
-              excerpt={post.excerpt}
-              date={post.date}
-              url={post.url}
-            />
-          ))}
+          {isLoading ? (
+            // Loading skeleton
+            [...Array(3)].map((_, index) => (
+              <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 animate-pulse">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4"></div>
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+              </div>
+            ))
+          ) : error ? (
+            <div className="col-span-3 text-center text-red-500 dark:text-red-400">
+              {error}
+            </div>
+          ) : (
+            blogPosts.map((post, index) => (
+              <BlogPost
+                key={index}
+                title={post.title}
+                excerpt={post.excerpt}
+                date={post.date}
+                url={post.url}
+              />
+            ))
+          )}
         </div>
         
         <div className="text-center mt-12">
