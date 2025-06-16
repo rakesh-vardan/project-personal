@@ -38,7 +38,7 @@ const SkillItem: React.FC<SkillItemProps> = ({ category, skills }) => {
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{category}</h3>
       <div className="flex flex-wrap gap-2">
         {skills.map((skill, index) => (
-          <span 
+          <span
             key={index}
             className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-200 dark:border-gray-700"
           >
@@ -54,35 +54,67 @@ const ResumeSection: React.FC = () => {
   const experiences = [
     {
       title: "Principal Software Engineer",
-      company: "TechInnovate Solutions",
-      period: "2021 - Present",
+      company: "Medtronic",
+      period: "Nov 2024 - Present",
       description: [
-        "Lead architect for enterprise-wide test automation strategy, increasing test coverage by 40%",
-        "Designed modular test framework with Playwright and TypeScript used by 5 cross-functional teams",
-        "Implemented CI/CD pipelines with GitHub Actions, reducing deployment time by 60%",
-        "Mentored team of 8 SDETs, establishing best practices and career development plans"
+        "Lead quality engineering and deliver compliant solutions for medical device software.",
+        "Build scalable test automation frameworks and drive CI/CD in healthcare environments.",
+        "Leverage Generative AI and develop utilities to boost automation efficiency and coverage.",
+        "Collaborate cross-functionally to ensure safe, high-quality med-tech software delivery."
       ]
     },
     {
-      title: "Senior SDET Lead",
-      company: "Global Software Inc.",
-      period: "2018 - 2021",
+      title: "Lead SDET",
+      company: "EPAM Systems",
+      period: "Dec 2020 - Nov 2024",
       description: [
-        "Developed end-to-end test automation framework using Cypress and JavaScript",
-        "Integrated visual regression testing with Percy, reducing UI bugs by 35%",
-        "Established API testing strategy with Postman and Newman integrated into CI pipeline",
-        "Led team of 5 QA engineers, transitioning from manual to automated testing"
+        "Led design of enterprise test automation frameworks and drove DevOps transformation at Mastercard.",
+        "Mentored and managed a team of 4 engineers, providing technical guidance and career development.",
+        "Drove organizational initiatives at EPAM, including interviews, training, and knowledge-sharing.",
+        "Led Generative AI PoC and evangelized AI-driven quality practices through demos and workshops."
       ]
     },
     {
-      title: "Software Engineer in Test",
-      company: "Innovation Labs",
-      period: "2015 - 2018",
+      title: "Senior SDET",
+      company: "EPAM Systems",
+      period: "Apr 2017 - Dec 2020",
       description: [
-        "Implemented Selenium-based test automation framework for web applications",
-        "Created Jenkins pipelines for continuous testing across multiple environments",
-        "Developed test data management solution for complex testing scenarios",
-        "Collaborated with dev teams to integrate unit and integration tests"
+        "Led QA team to deliver a GDPR-compliant product for a global financial client in 9 months.",
+        "Established test strategy, automation frameworks, and CI pipelines in an enterprise environment.",
+        "Built robust test automation to support continuous integration and frequent releases.",
+        "Collaborated with developers and stakeholders to ensure quality and enable fast feedback cycles."
+      ]
+    },
+    {
+      title: "Senior Professional Engineer",
+      company: "DXC Technology (formerly Computer Sciences Corporation)",
+      period: "Jul 2014 - Feb 2017",
+      description: [
+        "Delivered automation and functional testing solutions for telecom and insurance clients, including onsite work in Sweden.",
+        "Conducted real-device mobile testing and validated end-to-end telecom service lifecycles.",
+        "Focused on system-level testing and collaborated with clients to ensure high-quality solutions.",
+        "Identified automation opportunities and aligned testing with project timelines and quality goals."
+      ]
+    },
+    {
+      title: "Professional Engineer",
+      company: "DXC Technology (formerly Computer Sciences Corporation)",
+      period: "Apr 2011 - Jun 2014",
+      description: [
+        "Worked on functional testing for a U.S.-based insurance client, ensuring application quality through detailed test plans and regression execution.",
+        "Verified fixes and maintained traceability using defect tracking tools to support release readiness.",
+        "Automated test reporting by developing Excel macros, improving efficiency across the QA team.",
+        "Took on early team coordination responsibilities, laying the foundation for future leadership roles."
+      ]
+    },
+    {
+      title: "System Engineer",
+      company: "DXC Technology (formerly Computer Sciences Corporation)",
+      period: "Jan 2010 - Mar 2011",
+      description: [
+        "Performed functional testing for a major healthcare client (NHS UK), ensuring system reliability and compliance.",
+        "Logged reproducible bugs, verified fixes, and worked closely with developers on resolutions.",
+        "Contributed to stable test automation using HP QTP, and explored early-stage automation with Selenium."
       ]
     }
   ];
@@ -90,19 +122,23 @@ const ResumeSection: React.FC = () => {
   const skills = [
     {
       category: "Languages",
-      skills: ["JavaScript", "TypeScript", "Python", "Java", "HTML/CSS"]
+      skills: ["Java", "JavaScript", "TypeScript", "C#", "Python", "HTML/CSS"]
     },
     {
       category: "Test Automation",
-      skills: ["Cypress", "Playwright", "Selenium", "Appium", "Postman", "RestAssured", "JUnit", "Jest", "TestNG"]
+      skills: ["Cypress", "Playwright", "Selenium", "Appium", "Postman", "RestAssured", "JUnit", "Jest", "TestNG", "SeeTest", "QTP"]
     },
     {
       category: "CI/CD & DevOps",
-      skills: ["Jenkins", "GitHub Actions", "CircleCI", "Docker", "Kubernetes", "AWS", "Azure DevOps"]
+      skills: ["Jenkins", "GitHub Actions", "Azure DevOps", "CircleCI", "Docker", "Kubernetes", "AWS", "Azure", "GCP", "Terraform", "Ansible"]
     },
     {
-      category: "Frameworks & Libraries",
-      skills: ["Node.js", "React", "Express", "Spring Boot", "Flask"]
+      category: "Development Frameworks & Libraries",
+      skills: ["Node.js", "React", "Express", "Spring Boot", "Spring Cloud", "Flask"]
+    },
+    {
+      category: "AI & ML",
+      skills: ["OpenAI", "Semantic Kernel", "Express", "Spring Boot", "Flask"]
     }
   ];
 
@@ -113,7 +149,7 @@ const ResumeSection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Resume</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-blue-500 mx-auto"></div>
         </div>
-        
+
         <div className="max-w-4xl mx-auto">
           <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-8 border border-gray-200 dark:border-gray-700">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
@@ -126,26 +162,26 @@ const ResumeSection: React.FC = () => {
                 Download Resume
               </Button>
             </div>
-            
+
             <div className="mb-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Award className="mr-2 h-5 w-5 text-emerald-500" /> Professional Summary
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Experienced Principal Software Engineer and Test Automation Architect with 12+ years of experience
+                Experienced Principal Software Engineer and Test Automation Architect with 15+ years of experience
                 designing and implementing scalable test automation frameworks, CI/CD pipelines, and quality
                 engineering practices. Proven track record of leading teams, mentoring engineers, and driving
                 technical excellence across organizations.
               </p>
             </div>
-            
+
             <div className="mb-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <Briefcase className="mr-2 h-5 w-5 text-emerald-500" /> Work Experience
               </h3>
               <div>
                 {experiences.map((exp, index) => (
-                  <ExperienceItem 
+                  <ExperienceItem
                     key={index}
                     title={exp.title}
                     company={exp.company}
@@ -155,26 +191,54 @@ const ResumeSection: React.FC = () => {
                 ))}
               </div>
             </div>
-            
+
             <div className="mb-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <GraduationCap className="mr-2 h-5 w-5 text-emerald-500" /> Education
               </h3>
               <div className="pl-8 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-emerald-500 before:to-blue-500">
                 <div className="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-emerald-500"></div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Master of Computer Science</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Bachelors of Technology</h3>
                 <div className="flex justify-between items-center">
-                  <p className="text-emerald-600 dark:text-emerald-400">University of Technology</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">2010 - 2012</p>
+                  <p className="text-emerald-600 dark:text-emerald-400">Jawaharlal Nehru Technological University, Anantapur</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">2005 - 2009</p>
                 </div>
               </div>
             </div>
-            
+
+            {/* Certifications Section */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                <Award className="mr-2 h-5 w-5 text-emerald-500" /> Certifications
+              </h3>
+              <div className="pl-8 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-emerald-500 before:to-blue-500">
+                <div className="absolute -left-1.5 top-1.5 h-3 w-3 rounded-full bg-emerald-500"></div>
+                <ul className="list-disc pl-5">
+                  <li className="mb-4">
+                    <span className="font-semibold">Microsoft Certified: Azure AI Fundamentals</span><br />
+                    <span className="text-gray-600 dark:text-gray-400">Issued Jan 2024</span><br />
+                  </li>
+                  <li className="mb-4">
+                    <span className="font-semibold">Microsoft Certified: Azure Fundamentals</span><br />
+                    <span className="text-gray-600 dark:text-gray-400">Issued Jan 2021</span><br />
+                  </li>
+                  <li className="mb-4">
+                    <span className="font-semibold">Google Cloud Certified Professional Cloud Architect</span><br />
+                    <span className="text-gray-600 dark:text-gray-400">Issued Jan 2021 · Expired Jan 2023</span>
+                  </li>
+                  <li className="mb-4">
+                    <span className="font-semibold">Google Associate Cloud Engineer</span><br />
+                    <span className="text-gray-600 dark:text-gray-400">Issued Aug 2020 · Expired Aug 2022</span><br />
+                  </li>
+                </ul>
+              </div>
+            </div>
+
             <div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Skills</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {skills.map((skill, index) => (
-                  <SkillItem 
+                  <SkillItem
                     key={index}
                     category={skill.category}
                     skills={skill.skills}

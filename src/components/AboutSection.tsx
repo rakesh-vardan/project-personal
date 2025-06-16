@@ -61,7 +61,7 @@ const AboutSection: React.FC = () => {
         
         <div className="max-w-4xl mx-auto mb-16">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-            With over 12 years of experience in the software industry, I've specialized in designing robust, scalable test automation frameworks
+            With over 15 years of experience in the software industry, I've specialized in designing robust, scalable test automation frameworks
             and CI/CD pipelines that enable teams to deliver high-quality software with confidence.
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
@@ -70,7 +70,7 @@ const AboutSection: React.FC = () => {
             and implementing DevOps practices that bridge the gap between development and operations.
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-            Beyond my technical work, I'm dedicated to mentoring SDETs, sharing knowledge through my blog at 
+            Beyond my technical work, I'm dedicated to mentoring SDETs, sharing knowledge through my blog at{" "}
             <a href="https://blog.rakeshvardan.com" className="text-emerald-500 hover:text-emerald-400 transition-colors ml-1">blog.rakeshvardan.com</a>,
             and contributing to the wider developer community through open-source projects and speaking engagements.
           </p>

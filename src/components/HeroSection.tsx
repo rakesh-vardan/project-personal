@@ -17,12 +17,12 @@ const HeroSection: React.FC = () => {
             </h1>
             
             <h2 className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-6">
-              Principal Software Engineer | Test Automation Architect | SDET | Full-stack Developer
+              Principal Software Engineer | Test Automation Architect
             </h2>
             
             <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto lg:mx-0">
               Designing robust, scalable, and future-ready test automation and CI/CD systems.
-              With 12+ years of experience crafting innovative solutions for complex engineering challenges.
+              With 15+ years of experience crafting innovative solutions for complex engineering challenges.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

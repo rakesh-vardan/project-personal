@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code, Linkedin, Github, Mail, Heart } from 'lucide-react';
+import { Code, Linkedin, Github, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
             </a>
             <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-md">
               Principal Software Engineer specializing in Test Automation Architecture, 
-              CI/CD pipelines, and full-stack engineering.
+              CI/CD pipelines, AI / ML and full-stack engineering.
             </p>
           </div>
           
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
             <h3 className="text-gray-900 dark:text-white font-medium mb-4">Connect</h3>
             <div className="flex space-x-4">
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/rakeshvardan/" 
                 className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a 
-                href="https://github.com" 
+                href="https://github.com/rakesh-vardan" 
                 className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
                 <Github className="h-5 w-5" />
               </a>
               <a 
-                href="mailto:contact@rakeshvardan.com" 
+                href="mailto:hello@rakeshvardan.com" 
                 className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
               >
                 <Mail className="h-5 w-5" />
@@ -71,7 +71,7 @@ const Footer: React.FC = () => {
             &copy; {currentYear} Rakesh Vardan. All rights reserved.
           </p>
           <p className="text-gray-500 dark:text-gray-400 flex items-center mt-4 md:mt-0">
-            Made with <Heart className="h-4 w-4 text-red-500 mx-1" /> using Bolt.new
+            Built with React ⚛️ + TypeScript 💙
           </p>
         </div>
       </div>
