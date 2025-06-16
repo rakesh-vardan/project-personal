@@ -57,7 +57,7 @@ const BlogSection: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Blog</h2>
           <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-blue-500 mx-auto"></div>
           <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
-            Thoughts, tutorials, and insights on test automation, CI/CD, and software engineering practices.
+            Thoughts, tutorials, and insights on test automation, CI/CD, Generative AI, and software engineering practices.
           </p>
         </div>
         

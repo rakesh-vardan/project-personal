@@ -19,8 +19,8 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({ title, company, period,
         <p className="text-sm text-gray-500 dark:text-gray-400">{period}</p>
       </div>
       <ul className="list-disc pl-5">
-        {description.map((item, index) => (
-          <li key={index} className="text-gray-600 dark:text-gray-400 mb-1">{item}</li>
+        {description.map((item) => (
+          <li key={`${title}-${item.substring(0, 20)}`} className="text-gray-600 dark:text-gray-400 mb-1">{item}</li>
         ))}
       </ul>
     </div>
@@ -37,9 +37,9 @@ const SkillItem: React.FC<SkillItemProps> = ({ category, skills }) => {
     <div className="mb-6">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{category}</h3>
       <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
+        {skills.map((skill) => (
           <span
-            key={index}
+            key={skill}
             className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm border border-gray-200 dark:border-gray-700"
           >
             {skill}
@@ -51,6 +51,15 @@ const SkillItem: React.FC<SkillItemProps> = ({ category, skills }) => {
 };
 
 const ResumeSection: React.FC = () => {
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/resume/rakesh-vardan-resume.pdf';
+    link.download = 'rakesh-vardan-resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const experiences = [
     {
       title: "Principal Software Engineer",
@@ -138,7 +147,7 @@ const ResumeSection: React.FC = () => {
     },
     {
       category: "AI & ML",
-      skills: ["OpenAI", "Semantic Kernel", "Express", "Spring Boot", "Flask"]
+      skills: ["OpenAI", "Semantic Kernel", "Azure AI", "Google AI", "Machine Learning Concepts"]
     }
   ];
 
@@ -157,7 +166,11 @@ const ResumeSection: React.FC = () => {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Rakesh Vardan</h3>
                 <p className="text-emerald-600 dark:text-emerald-400">Principal Software Engineer & Test Automation Architect</p>
               </div>
-              <Button variant="primary" className="mt-4 md:mt-0">
+              <Button 
+                variant="primary" 
+                className="mt-4 md:mt-0"
+                onClick={handleDownload}
+              >
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
               </Button>
@@ -180,9 +193,9 @@ const ResumeSection: React.FC = () => {
                 <Briefcase className="mr-2 h-5 w-5 text-emerald-500" /> Work Experience
               </h3>
               <div>
-                {experiences.map((exp, index) => (
+                {experiences.map((exp) => (
                   <ExperienceItem
-                    key={index}
+                    key={`${exp.company}-${exp.period}`}
                     title={exp.title}
                     company={exp.company}
                     period={exp.period}
@@ -237,9 +250,9 @@ const ResumeSection: React.FC = () => {
             <div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Skills</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {skills.map((skill, index) => (
+                {skills.map((skill) => (
                   <SkillItem
-                    key={index}
+                    key={skill.category}
                     category={skill.category}
                     skills={skill.skills}
                   />
