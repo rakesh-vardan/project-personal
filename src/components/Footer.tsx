@@ -21,20 +21,37 @@ const Footer: React.FC = () => {
             </p>
           </div>
           
-          <div>
-            <h3 className="text-gray-900 dark:text-white font-medium mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {['Home', 'About', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="grid grid-cols-2 gap-x-12 gap-y-8">
+            <div>
+              <h3 className="text-gray-900 dark:text-white font-medium mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                {['Home', 'About', 'Featured', 'Projects'].map((item) => (
+                  <li key={item}>
+                    <a 
+                      href={`#${item.toLowerCase()}`}
+                      className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-gray-900 dark:text-white font-medium mb-4">More</h3>
+              <ul className="space-y-2">
+                {['Testimonials', 'Blog', 'Resume', 'Contact'].map((item) => (
+                  <li key={item}>
+                    <a 
+                      href={`#${item.toLowerCase()}`}
+                      className="text-gray-600 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           
           <div>
