@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface Achievement {
   title: string;
@@ -37,14 +37,40 @@ const achievements: Achievement[] = [
 
 const FeaturedSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const navigateToSlide = (index: number) => {
+    setIsAnimating(true);
+    setCurrentIndex(index);
+  };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % achievements.length);
+    navigateToSlide((currentIndex + 1) % achievements.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + achievements.length) % achievements.length);
+    navigateToSlide((currentIndex - 1 + achievements.length) % achievements.length);
   };
+
+  // Handle animation completion
+  useEffect(() => {
+    if (isAnimating) {
+      const timer = setTimeout(() => setIsAnimating(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isAnimating]);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    if (!isPaused) {
+      const timer = setInterval(() => {
+        nextSlide();
+      }, 5000); // Change slide every 5 seconds
+
+      return () => clearInterval(timer);
+    }
+  }, [currentIndex, isPaused]);
 
   return (
     <section id="featured" className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -57,21 +83,26 @@ const FeaturedSection: React.FC = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg">
+          <section 
+            aria-label="Featured accomplishments carousel"
+            className="overflow-hidden rounded-xl"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <div 
-              className="flex transition-transform duration-500 ease-in-out"
+              className={`flex transition-transform duration-500 ease-in-out ${isAnimating ? 'opacity-90' : ''}`}
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              {achievements.map((achievement, index) => (
+              {achievements.map((achievement) => (
                 <div
-                  key={index}
+                  key={achievement.title}
                   className="w-full flex-shrink-0 p-8"
                 >
-                  <div className="h-full flex flex-col items-center text-center">
+                  <div className="h-full flex flex-col items-center bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                       {achievement.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 text-center">
                       {achievement.description}
                     </p>
                     {achievement.link && (
@@ -79,7 +110,7 @@ const FeaturedSection: React.FC = () => {
                         href={achievement.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
+                        className="mt-auto inline-flex items-center text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
                       >
                         {achievement.linkText}
                       </a>
@@ -88,34 +119,61 @@ const FeaturedSection: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            <ChevronLeft className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-          </button>
+          {/* Navigation Controls */}
+          <div className="mt-8">
+            {/* Progress Indicator */}
+            <div className="flex items-center justify-center mb-4">
+              <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {currentIndex + 1} of {achievements.length}
+              </span>
+            </div>
 
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            <ChevronRight className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-          </button>
+            {/* Navigation Dots with Preview */}
+            <div className="flex justify-center items-center gap-4">
+              {achievements.map((achievement, i) => (
+                <button
+                  key={achievement.title}
+                  onClick={() => navigateToSlide(i)}
+                  className={`group relative ${
+                    i === currentIndex
+                      ? 'scale-125'
+                      : 'hover:scale-110'
+                  } transition-all duration-300`}
+                  aria-label={`Go to slide ${i + 1}: ${achievement.title}`}
+                >
+                  <div 
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      i === currentIndex
+                        ? 'bg-emerald-500'
+                        : 'bg-gray-300 dark:bg-gray-600 hover:bg-emerald-400 dark:hover:bg-emerald-600'
+                    }`}
+                  />
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 py-1 px-2 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                    {achievement.title}
+                  </div>
+                </button>
+              ))}
+            </div>
 
-          <div className="flex justify-center mt-6 space-x-2">
-            {achievements.map((_, index) => (
+            {/* Arrow Navigation */}
+            <div className="flex justify-center items-center gap-6 mt-4">
               <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                  index === currentIndex
-                    ? 'bg-emerald-500'
-                    : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-              />
-            ))}
+                onClick={prevSlide}
+                className="p-2 text-gray-500 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                aria-label="Previous slide"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="p-2 text-gray-500 dark:text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+                aria-label="Next slide"
+              >
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
