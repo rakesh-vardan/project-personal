@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
+import FeaturedSection from './components/FeaturedSection';
 import BlogSection from './components/BlogSection';
 import ResumeSection from './components/ResumeSection';
 import ContactSection from './components/ContactSection';
@@ -49,6 +50,7 @@ function App() {
         <main>
           <HeroSection />
           <AboutSection />
+          <FeaturedSection />
           <ProjectsSection />
           <BlogSection />
           <ResumeSection />

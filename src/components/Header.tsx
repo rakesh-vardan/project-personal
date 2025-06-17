@@ -40,7 +40,7 @@ const Header: React.FC = () => {
           
           <nav className="hidden md:block">
             <ul className="flex space-x-8">
-              {['Home', 'About', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
+              {['Home', 'About', 'Featured', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
                 <li key={item}>
                   <a 
                     href={`#${item.toLowerCase()}`}
