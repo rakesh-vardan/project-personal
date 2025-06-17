@@ -7,6 +7,7 @@ type ButtonProps = {
   onClick?: () => void;
   className?: string;
   href?: string;
+  download?: boolean;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
 };
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   className = '',
   href,
+  download,
   type = 'button',
   disabled = false,
 }) => {
@@ -39,7 +41,7 @@ const Button: React.FC<ButtonProps> = ({
   
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} download={download}>
         {children}
       </a>
     );
