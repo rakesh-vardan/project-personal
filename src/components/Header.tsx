@@ -75,7 +75,7 @@ const Header: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm shadow-lg border-t border-gray-200 dark:border-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {['Home', 'About', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
+            {['Home', 'About', 'Featured', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
