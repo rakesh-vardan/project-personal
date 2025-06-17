@@ -16,6 +16,12 @@ const achievements: Achievement[] = [
     linkText: 'View Conference Details'
   },
   {
+    title: 'Technical Mentor at Preplaced',
+    description: 'Mentoring and guiding software engineers in test automation, helping them advance their careers through personalized coaching, interview preparation, and hands-on technical guidance. Specializing in test automation frameworks, CI/CD practices, and modern testing methodologies to help engineers excel in their careers.',
+    link: 'https://preplaced.in/profile/rakesh-vardan',
+    linkText: 'View Mentor Profile'
+  },
+  {
     title: 'LambdaTest Technical Author',
     description: 'Contributing valuable insights to the testing community through technical articles on test automation, CI/CD, and software quality. My articles focus on practical implementations and best practices, helping teams improve their testing processes and delivery pipelines.',
     link: 'https://www.lambdatest.com/blog/author/rakeshbudugu/',
