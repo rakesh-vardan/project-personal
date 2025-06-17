@@ -7,7 +7,7 @@ const HeroSection: React.FC = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           <div className="lg:w-1/2 text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
               <span className="block">Hi, I'm</span>
@@ -39,19 +39,32 @@ const HeroSection: React.FC = () => {
           </div>
           
           <div className="lg:w-1/2 flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-emerald-500 shadow-xl shadow-emerald-500/20">
-                <img
-                  src={myPic}
-                  alt="Rakesh Vardan"
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              </div>
+            <div className="relative group">
+              {/* Background decoration */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full blur-2xl opacity-30 group-hover:opacity-40 transition-opacity duration-500"></div>
               
-              {/* Decorative elements */}
-              <div className="absolute -z-10 -bottom-4 -right-4 w-64 h-64 sm:w-80 sm:h-80 rounded-full border-2 border-blue-500"></div>
-              <div className="absolute -z-10 -top-4 -left-4 w-64 h-64 sm:w-80 sm:h-80 rounded-full border-2 border-emerald-400"></div>
+              {/* Ring decoration */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full blur-sm opacity-50"></div>
+              
+              {/* Main image container */}
+              <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden">
+                {/* Border gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 via-emerald-400 to-blue-500 p-1 rounded-full">
+                  {/* Image container */}
+                  <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800">
+                    <img
+                      src={myPic}
+                      alt="Rakesh Vardan"
+                      className="w-full h-full object-cover object-center scale-105 hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative dots */}
+              <div className="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full blur-sm opacity-50"></div>
+              <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full blur-sm opacity-50"></div>
             </div>
           </div>
         </div>
