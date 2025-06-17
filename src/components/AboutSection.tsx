@@ -46,7 +46,7 @@ const AboutSection: React.FC = () => {
     },
     {
       icon: <Bot className="h-8 w-8" />,
-      title: "Test Automation AI",
+      title: "AI-enabled Test Automation",
       description: "Exploring AI-powered testing solutions and self-healing test automation frameworks."
     },
   ];
