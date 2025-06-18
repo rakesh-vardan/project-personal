@@ -43,40 +43,48 @@ const BlogSection: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
+    const fetchWithRetry = async (retries = 3, delay = 1000) => {
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+          setIsLoading(true);
+          setError(null);
 
-        // Using a CORS proxy to fetch the RSS feed
-        const corsProxy = 'https://api.allorigins.win/raw?url=';
-        const response = await axios.get(`${corsProxy}${encodeURIComponent('https://blog.rakeshvardan.com/rss.xml')}`);
-        
-        const parser = new XMLParser();
-        const result = parser.parse(response.data);
-        
-        const items: RSSItem[] = result.rss.channel.item;
-        const latestPosts = items.slice(0, 3).map(item => ({
-          title: item.title,
-          excerpt: item.description.replace(/<[^>]+>/g, '').substring(0, 150) + '...',
-          date: new Date(item.pubDate).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
-          url: item.link
-        }));
+          // Using a CORS proxy to fetch the RSS feed
+          const corsProxy = 'https://api.allorigins.win/raw?url=';
+          const response = await axios.get(`${corsProxy}${encodeURIComponent('https://blog.rakeshvardan.com/rss.xml')}`);
 
-        setBlogPosts(latestPosts);
-      } catch (err) {
-        console.error('Error fetching blog posts:', err);
-        setError('Failed to load blog posts. Please try again later.');
-      } finally {
-        setIsLoading(false);
+          const parser = new XMLParser();
+          const result = parser.parse(response.data);
+
+          const items: RSSItem[] = result.rss.channel.item;
+          const latestPosts = items.slice(0, 3).map(item => ({
+            title: item.title,
+            excerpt: item.description.replace(/<[^>]+>/g, '').substring(0, 150) + '...',
+            date: new Date(item.pubDate).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            url: item.link
+          }));
+
+          setBlogPosts(latestPosts);
+          setIsLoading(false);
+          return;
+        } catch (err) {
+          if (attempt === retries) {
+            console.error('Error fetching blog posts:', err);
+            setError('Failed to load blog posts. Please try again later.');
+            setIsLoading(false);
+          } else {
+            // Wait before retrying
+            await new Promise(res => setTimeout(res, delay));
+          }
+        }
       }
     };
 
-    fetchBlogPosts();
+    fetchWithRetry();
   }, []);
 
   return (
