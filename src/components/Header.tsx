@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import AskAIModal from "./AskAIModal";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showAskAIModal, setShowAskAIModal] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,6 +56,12 @@ const Header: React.FC = () => {
           </nav>
           
           <div className="flex items-center gap-4">
+            <button
+              className="hidden md:inline-block bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition-colors duration-200"
+              onClick={() => setShowAskAIModal(true)}
+            >
+              Ask AI
+            </button>
             <ThemeToggle />
             <div className="md:hidden flex items-center">
               <button
@@ -85,9 +93,16 @@ const Header: React.FC = () => {
                 {item}
               </a>
             ))}
+            <button
+              className="w-full mt-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition-colors duration-200"
+              onClick={() => { setShowAskAIModal(true); setIsOpen(false); }}
+            >
+              Ask AI
+            </button>
           </div>
         </div>
       )}
+      <AskAIModal open={showAskAIModal} onClose={() => setShowAskAIModal(false)} />
     </header>
   );
 };
